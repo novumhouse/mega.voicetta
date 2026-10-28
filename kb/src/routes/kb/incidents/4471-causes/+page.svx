@@ -1,0 +1,42 @@
+---
+layout: runbook
+title: '#4471 · two causes under one ticket'
+owner: rafal.florek@novumhouse.pl
+status: draft
+reviewed: 2026-10-28
+signature: rafal.florek@novumhouse.pl
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+Ticket **#4471** merged 412 unique reports (427 export rows; 15 duplicate ids) and marked them known as one month-flip bug. The desk’s own cause logic disagrees: **two** causes sit in that merge.
+
+<Callout>
+Not one issue. `parser` owns most of the queue; `hint` has no ticket of its own.
+</Callout>
+
+## What was merged
+
+<CauseTable ticket={4471} />
+
+## Tickets filed
+
+| cause | reports | public ticket |
+| --- | ---: | --- |
+| `parser` | 379 | https://github.com/novumhouse/mega.voicetta/issues/1 |
+| `hint` | 33 | https://github.com/novumhouse/mega.voicetta/issues/2 |
+
+- **`parser`:** the shared parser reads month first; day-first tenants flip.
+- **`hint`:** booking-v3 prints `MM/DD/YYYY`; day-first tenants type that order; the form still reads day first. Tenants: `alder.physio`, `copper.studio`, `pale.harbour`. Form channel only.
+
+Subject-line dedupe ([decision 0001](/kb/decisions/0001-dedupe-by-subject)) hid the split. Match on cause (tenant locale + channel + form), not on subject alone.
+
+## Desk notes
+
+Five reports in `desk-notes.json` (`oneDayMove`) were read as a one-day move. They stay under `parser` by tenant in this table; they are not a third cause in `causes.ts`.
+
+<RenderStamp {signature} />
