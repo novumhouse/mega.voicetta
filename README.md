@@ -14,4 +14,4 @@ Public deliverable for support desk ticket **#4471**.
 - **`.svx` (kb source):** [`support-kb/src/routes/kb/incidents/4471-causes/+page.svx`](./support-kb/src/routes/kb/incidents/4471-causes/+page.svx)
 - **As the desk will see it:** [`desk-view/4471-causes.html`](./desk-view/4471-causes.html)
 
-Signature: `rafal.florek@novumhouse.pl` → desk ref `DR-3HAV-0GZF`.
+Signature: start-challenge `ticket` → desk ref `DR-DK73-MZCH`.
